@@ -24,6 +24,12 @@ public class ShipController : MonoBehaviour
     public void SpawnShip()
     {
         var newShip = Instantiate(ShipPrefaps, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, -0.5f, 0)), Quaternion.identity);
+
+        // Reset the spawned ship's bullet to the initial bullet
+        var shipScript = newShip.GetComponent<ShipScript>();
+        if (shipScript != null)
+            shipScript.ResetToDefaultBulletTier();
+
         var point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, 0));
         point.z = 0;
         StartCoroutine(MoveShipToPoint(newShip, point));

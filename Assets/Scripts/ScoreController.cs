@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,14 +7,18 @@ public class ScoreController : MonoBehaviour
     [SerializeField] TMP_Text textScore;
 
     public static ScoreController instance;
-    private int score;
+    public int Score { get; private set; }
+    public event Action<int> OnScoreChanged;
+
     private void Awake()
     {
         instance = this;
     }
+
     public void GetScore(int score)
     {
-        this.score += score;
-        textScore.text = "Score: " + this.score.ToString();
+        Score += score;
+        textScore.text = "Score: " + Score.ToString();
+        OnScoreChanged?.Invoke(Score);
     }
 }
