@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShipScript : MonoBehaviour
@@ -6,9 +7,11 @@ public class ShipScript : MonoBehaviour
     [SerializeField] private GameObject[] BulletList;
     [SerializeField] private int CurrentTierBullet;
     [SerializeField] private GameObject VFX;
+    [SerializeField] private GameObject Shield;
+    [SerializeField] private int ScoreOfChickenLeg;
     void Start()
     {
-
+        StartCoroutine(DisableShield());
     }
 
 
@@ -36,9 +39,23 @@ public class ShipScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             Instantiate(BulletList[CurrentTierBullet], transform.position, Quaternion.identity);
     }
+
+    IEnumerator DisableShield()
+    {
+        yield return new WaitForSeconds(8);
+        Shield.SetActive(false);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (!Shield.activeSelf && (collision.CompareTag("Chicken") || collision.CompareTag("Egg")))
+        {
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("chicken leg"))
+        {
+            Destroy(collision.gameObject);
+            ScoreController.instance.GetScore(ScoreOfChickenLeg);
+        }
     }
 
     private void OnDestroy()
@@ -47,6 +64,7 @@ public class ShipScript : MonoBehaviour
         {
             var vfx = Instantiate(VFX, transform.position, Quaternion.identity);
             Destroy(vfx, 1f);
+            ShipController.Instance.SpawnShip();
         }
     }
 }
