@@ -6,6 +6,11 @@ public class Boss : MonoBehaviour
     [SerializeField] private GameObject EggPreFap;
     [SerializeField] private int health = 100;
     [SerializeField] private GameObject VFX;
+    [SerializeField] private GameObject bossHpBar;
+    public int CurrentHealth => health;
+    public int MaxHealth => maxHealth;
+
+    private int maxHealth;
     public static Boss Instance;
 
     private void Awake()
@@ -16,13 +21,17 @@ public class Boss : MonoBehaviour
     {
         StartCoroutine(SpawnEgg());
         StartCoroutine(MoveBossToRandomPoint());
+        bossHpBar.SetActive(true);
+        maxHealth = health;
     }
 
     public void PutDamge(int damge)
     {
         health -= damge;
+        float healthPercent = (float)health / maxHealth;
         if (health <= 0)
         {
+            bossHpBar.SetActive(false);
             Destroy(gameObject);
             var vfx = Instantiate(VFX, transform.position, Quaternion.identity);
             Destroy(vfx, 1);
