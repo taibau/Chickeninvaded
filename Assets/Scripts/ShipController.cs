@@ -1,3 +1,4 @@
+
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,6 @@ public class ShipController : MonoBehaviour
 
         var point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, 0));
         point.z = 0;
-
         StartCoroutine(MoveShipToPoint(newShip, point));
     }
 

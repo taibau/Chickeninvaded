@@ -9,6 +9,8 @@ TagManager:
   - Egg
   - chicken leg
   - Updatebullet
+  - ShieldPower
+  - FireRate
   layers:
   - Default
   - TransparentFX

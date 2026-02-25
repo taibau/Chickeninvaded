@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ public class ShipScript : MonoBehaviour
         if (Shield != null)
             Shield.SetActive(false);
 
-        ActivateShield(); //  vào game có khiên 5s
+        ActivateShield(); // vào game có khiên 5s
     }
 
     void Update()
@@ -90,7 +90,6 @@ public class ShipScript : MonoBehaviour
         fireRateRoutine = null;
     }
 
-
     // SHIELD POWER (ANTI STACK)
     public void ActivateShield()
     {
@@ -115,7 +114,7 @@ public class ShipScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //  Chết nếu không có khiên
+        // Chết nếu không có khiên
         if ((collision.CompareTag("Chicken") || collision.CompareTag("Egg")))
         {
             if (Shield != null && Shield.activeSelf)
@@ -125,18 +124,19 @@ public class ShipScript : MonoBehaviour
 
             Destroy(gameObject);
         }
-        //  Ăn đùi gà
+        // Ăn đùi gà
         else if (collision.CompareTag("chicken leg"))
         {
             Destroy(collision.gameObject);
             ScoreController.instance.GetScore(ScoreOfChickenLeg);
         }
-        //  Update Bullet
+        // Update Bullet
         else if (collision.CompareTag("Updatebullet"))
         {
             Destroy(collision.gameObject);
 
             List<int> valid = new List<int>();
+
             for (int i = 0; i < BulletList.Length; i++)
             {
                 if (BulletList[i] != null)
@@ -149,13 +149,13 @@ public class ShipScript : MonoBehaviour
                 CurrentTierBullet = chosenIndex;
             }
         }
-        //  Power tăng tốc bắn
+        // Power tăng tốc bắn
         else if (collision.CompareTag("FireRate"))
         {
             Destroy(collision.gameObject);
             ActivateFireRate();
         }
-        //  Power khiên
+        // Power khiên
         else if (collision.CompareTag("ShieldPower"))
         {
             Destroy(collision.gameObject);

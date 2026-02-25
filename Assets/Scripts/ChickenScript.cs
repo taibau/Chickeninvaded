@@ -16,6 +16,7 @@ public class ChickenScript : MonoBehaviour
     // xác suất đẻ trứng
     [SerializeField, Range(0f, 1f)]
     private float eggDropChance = 0.4f;
+
     private void Awake()
     {
         StartCoroutine(SpawmEgg());

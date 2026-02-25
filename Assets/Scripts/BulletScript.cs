@@ -10,6 +10,7 @@ public class BulletScript : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.up * Time.deltaTime * Speed);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +23,6 @@ public class BulletScript : MonoBehaviour
         {
             if (Boss.Instance != null)
                 Boss.Instance.PutDamge(damage);
-            Destroy(gameObject);
         }
     }
 }
