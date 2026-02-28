@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3889598472246117636}
   - component: {fileID: 8696687632267455253}
   - component: {fileID: 8342464645798859260}
+  - component: {fileID: 8149387509514868229}
   m_Layer: 0
   m_Name: FireRatePower
   m_TagString: FireRate
@@ -170,3 +171,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireRatePower
   fallSpeed: 2
+--- !u!114 &8149387509514868229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8211258992455433894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed549a041a3404a4a8000a3afcc43c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyIfReachDistance
+  DistanceDestroy: 0

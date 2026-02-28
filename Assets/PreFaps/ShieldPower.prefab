@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8433442355618918872}
   - component: {fileID: 2845258709341923400}
   - component: {fileID: 1225030662952138220}
+  - component: {fileID: -3552772637772763748}
   m_Layer: 0
   m_Name: ShieldPower
   m_TagString: ShieldPower
@@ -156,3 +157,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.01738727}
   m_Radius: 0.40296924
+--- !u!114 &-3552772637772763748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675765447788752532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed549a041a3404a4a8000a3afcc43c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyIfReachDistance
+  DistanceDestroy: 0

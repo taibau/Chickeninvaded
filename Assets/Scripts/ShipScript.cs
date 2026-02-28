@@ -173,7 +173,12 @@ public class ShipScript : MonoBehaviour
                 Destroy(vfx, 1f);
             }
 
-            ShipController.Instance.SpawnShip();
+            GameManager.Instance.LoseLife();
+
+            if (GameManager.Instance.lives > 0)
+            {
+                ShipController.Instance.SpawnShip();
+            }
         }
     }
 }

@@ -153,8 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletScript
   Speed: 10
-
-  damage: 5
+  damage: 6
 --- !u!114 &-7639764585640937788
 MonoBehaviour:
   m_ObjectHideFlags: 0
