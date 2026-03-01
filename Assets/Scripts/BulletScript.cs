@@ -23,6 +23,7 @@ public class BulletScript : MonoBehaviour
         {
             if (Boss.Instance != null)
                 Boss.Instance.PutDamge(damage);
+            Destroy(gameObject);
         }
     }
 }

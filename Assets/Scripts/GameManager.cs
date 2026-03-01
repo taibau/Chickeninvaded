@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject gameUIPanel;
     public GameObject gameOverPanel;
+    public static bool AutoStartAfterReload = false;
 
     private bool gameStarted = false;
 
@@ -23,6 +24,17 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0; // dừng game khi ở menu
         UpdateHighScoreUI();
+        if (AutoStartAfterReload)
+    {
+        AutoStartAfterReload = false;
+        StartGame();
+    }
+    else
+    {
+        mainMenuPanel.SetActive(true);
+        gameUIPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+    }
     }
 
     public void StartGame()

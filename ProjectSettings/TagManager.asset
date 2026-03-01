@@ -11,6 +11,7 @@ TagManager:
   - Updatebullet
   - ShieldPower
   - FireRate
+  - Home
   layers:
   - Default
   - TransparentFX

@@ -153,7 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletScript
   Speed: 10
+<<<<<<< Updated upstream
   damage: 6
+=======
+  damage: 10
+>>>>>>> Stashed changes
 --- !u!114 &-7639764585640937788
 MonoBehaviour:
   m_ObjectHideFlags: 0
