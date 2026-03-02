@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 30bda3bb9d09a8d4ba7bb6bacc1d94da
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - childBulletPrefaps: {fileID: 1619490778386646933, guid: 39cc16e46cdd3cb409294310338996f0, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

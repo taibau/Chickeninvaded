@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0; // dừng game khi ở menu
         UpdateHighScoreUI();
+
     }
 
     public void StartGame()

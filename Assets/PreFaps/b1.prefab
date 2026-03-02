@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 448223903971610983}
   - component: {fileID: 5599641784577723930}
   - component: {fileID: -4491410902306478775}
+  - component: {fileID: 3746346010673298877}
   m_Layer: 0
   m_Name: b1
   m_TagString: Bullet
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletScript
   Speed: 10
-  damage: 5
+  damage: 10
 --- !u!114 &-4491410902306478775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,3 +168,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyIfReachDistance
   DistanceDestroy: 20
+--- !u!114 &3746346010673298877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619490778386646933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bda3bb9d09a8d4ba7bb6bacc1d94da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrippleBulletScript
+  childBulletPrefaps: {fileID: 5590170951071592382, guid: 857f29ab42f75d7428d489b5a4659d94, type: 3}
+  delay1: 0.06
+  delay2: 0.12
