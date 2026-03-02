@@ -10,7 +10,8 @@ public class ShipScript : MonoBehaviour
     [SerializeField] private GameObject VFX;
     [SerializeField] private GameObject Shield;
     [SerializeField] private int ScoreOfChickenLeg;
-
+    [SerializeField] private GameObject RocketPrefab;
+    [SerializeField] private int rocketCount = 0;
     // 🔥 Fire rate system
     private float baseFireRate = 0.3f;
     private float currentFireRate;
@@ -33,6 +34,7 @@ public class ShipScript : MonoBehaviour
     {
         Move();
         Fire();
+        FireRocket();
     }
 
     void Move()
@@ -68,6 +70,22 @@ public class ShipScript : MonoBehaviour
                     transform.position + Vector3.up * 0.8f,
                     Quaternion.identity);
             }
+        }
+    }
+    void FireRocket()
+    {
+        if (Input.GetMouseButtonDown(1) && rocketCount > 0)
+        {
+            if (RocketPrefab != null)
+            {
+                Instantiate(
+                    RocketPrefab,
+                    transform.position + Vector3.up * 0.8f,
+                    Quaternion.identity);
+            }
+
+            rocketCount--;
+            
         }
     }
 
@@ -161,6 +179,11 @@ public class ShipScript : MonoBehaviour
             Destroy(collision.gameObject);
             ActivateShield();
         }
+        else if(collision.CompareTag("Gif"))
+        {
+            Destroy(collision.gameObject);
+            rocketCount += 1;
+        }
     }
 
     private void OnDestroy()
@@ -173,7 +196,12 @@ public class ShipScript : MonoBehaviour
                 Destroy(vfx, 1f);
             }
 
-            ShipController.Instance.SpawnShip();
+            GameManager.Instance.LoseLife();
+
+            if (GameManager.Instance.lives > 0)
+            {
+                ShipController.Instance.SpawnShip();
+            }
         }
     }
 }

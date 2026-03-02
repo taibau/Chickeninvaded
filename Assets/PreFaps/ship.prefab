@@ -119,6 +119,9 @@ MonoBehaviour:
   CurrentTierBullet: 0
   VFX: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
   Shield: {fileID: 7689169104624561332}
+  ScoreOfChickenLeg: 0
+  RocketPrefab: {fileID: 3872223246292924732, guid: 9e0f15c1bed4569428dfa6c0bb2bdc8a, type: 3}
+  rocketCount: 2
 --- !u!60 &8077326575544069893
 PolygonCollider2D:
   m_ObjectHideFlags: 0

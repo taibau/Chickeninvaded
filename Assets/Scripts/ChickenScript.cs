@@ -7,25 +7,24 @@ public class ChickenScript : MonoBehaviour
     [SerializeField] private int score;
     [SerializeField] private GameObject ChicckenLegPrefaps;
     [SerializeField] private GameObject UpdateBulletPrefaps;
-    [SerializeField, Range(0f, 1f)] private float updateDropChance = 0.05f; // tỉ lệ rơi (0..1)
+    [SerializeField, Range(0f, 1f)] private float updateDropChance = 0.05f;
     [SerializeField] private GameObject FireRatePrefabs;
     [SerializeField] private GameObject ShieldPrefabs;
     [SerializeField, Range(0f, 1f)] private float powerDropChance = 0.05f;
+    [SerializeField] private GameObject GiftPrefabs;
+    [SerializeField, Range(0f, 1f)] private float giftDropChance = 0.1f;
+   
 
-    [SerializeField] private int health = 20; // máu gà
-    // xác suất đẻ trứng
-    [SerializeField, Range(0f, 1f)]
-    private float eggDropChance = 0.4f;
+    [SerializeField] private int health = 20;
+    [SerializeField, Range(0f, 1f)] private float eggDropChance = 0.4f;
+
+    private bool isDead = false;
 
     private void Awake()
     {
         StartCoroutine(SpawmEgg());
     }
 
-    void Update()
-    {
-
-    }
     IEnumerator SpawmEgg()
     {
         while (true)
@@ -40,52 +39,88 @@ public class ChickenScript : MonoBehaviour
         }
     }
 
+    // 🔥 Nhận damage từ Rocket AOE
+    public void TakeDamage(int amount)
+    {
+        if (isDead) return;
+
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision == null)
-            return;
+        if (isDead) return;
+        if (collision == null) return;
 
+        // Chỉ xử lý Bullet thường ở đây
         if (collision.CompareTag("Bullet"))
         {
-            // lấy sát thương từ script viên đạn (nếu có)
             int damage = 1;
+
             var bulletScript = collision.GetComponent<BulletScript>();
             if (bulletScript != null)
                 damage = bulletScript.Damage;
 
-            // hủy viên đạn ngay
             Destroy(collision.gameObject);
 
-            // trừ máu
-            health -= damage;
+            TakeDamage(damage);
+        }
+    }
 
-            // nếu chết mới cho điểm, rơi đồ và destroy gà
-            if (health <= 0)
+    void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        if (ScoreController.instance != null)
+            ScoreController.instance.GetScore(score);
+
+        // VFX nổ
+        
+
+        // Rơi đùi gà
+        if (ChicckenLegPrefaps != null)
+            Instantiate(ChicckenLegPrefaps, transform.position, Quaternion.identity);
+
+        // Update Bullet
+        if (UpdateBulletPrefaps != null && Random.value <= updateDropChance)
+            Instantiate(UpdateBulletPrefaps, transform.position, Quaternion.identity);
+
+        // Shield hoặc FireRate
+        if (Random.value <= powerDropChance)
+        {
+            int random = Random.Range(0, 2);
+
+            if (random == 0 && FireRatePrefabs != null)
+                Instantiate(FireRatePrefabs, transform.position, Quaternion.identity);
+
+            if (random == 1 && ShieldPrefabs != null)
+                Instantiate(ShieldPrefabs, transform.position, Quaternion.identity);
+        }
+
+        // Gift văng ra
+        if (GiftPrefabs != null && Random.value <= giftDropChance)
+        {
+            GameObject gift = Instantiate(GiftPrefabs, transform.position, Quaternion.identity);
+
+            Rigidbody2D rb = gift.GetComponent<Rigidbody2D>();
+            if (rb != null)
             {
-                if (ScoreController.instance != null)
-                    ScoreController.instance.GetScore(score);
+                Vector2 force = new Vector2(
+                    Random.Range(-2f, 2f),
+                    Random.Range(3f, 5f)
+                );
 
-                if (ChicckenLegPrefaps != null)
-                    Instantiate(ChicckenLegPrefaps, transform.position, Quaternion.identity);
-
-                // rơi update bullet theo tỉ lệ
-                if (UpdateBulletPrefaps != null && Random.value <= updateDropChance)
-                    Instantiate(UpdateBulletPrefaps, transform.position, Quaternion.identity);
-                // rơi khiên hoặc tăng tốc độ bắn
-                if (Random.value <= powerDropChance)
-                {
-                    int random = Random.Range(0, 2);
-
-                    if (random == 0 && FireRatePrefabs != null)
-                        Instantiate(FireRatePrefabs, transform.position, Quaternion.identity);
-
-                    if (random == 1 && ShieldPrefabs != null)
-                        Instantiate(ShieldPrefabs, transform.position, Quaternion.identity);
-                }
-
-                Destroy(gameObject);
+                rb.AddForce(force, ForceMode2D.Impulse);
             }
         }
+
+        Destroy(gameObject);
     }
 
     private void OnDestroy()

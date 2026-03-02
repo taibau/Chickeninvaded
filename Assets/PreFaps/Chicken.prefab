@@ -211,7 +211,10 @@ MonoBehaviour:
   FireRatePrefabs: {fileID: 8211258992455433894, guid: ce60a7a2216f64748a31f0fd73edbca1, type: 3}
   ShieldPrefabs: {fileID: 8675765447788752532, guid: 4d2705098c954d2428bf55c55ba06d72, type: 3}
   powerDropChance: 0.1
+  GiftPrefabs: {fileID: 5799205062750129272, guid: aa0e76292925d404f9ded4579286242a, type: 3}
+  giftDropChance: 0.095
   health: 5
+  eggDropChance: 0.12
 --- !u!114 &-3635940234547852783
 MonoBehaviour:
   m_ObjectHideFlags: 0

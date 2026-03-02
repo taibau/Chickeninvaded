@@ -11,6 +11,8 @@ TagManager:
   - Updatebullet
   - ShieldPower
   - FireRate
+  - Gif
+  - Rocket
   layers:
   - Default
   - TransparentFX

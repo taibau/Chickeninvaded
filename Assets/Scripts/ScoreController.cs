@@ -8,6 +8,7 @@ public class ScoreController : MonoBehaviour
 
     public static ScoreController instance;
     private int score;
+    public int CurrentScore => score;
     private void Awake()
     {
         instance = this;
